@@ -1,0 +1,15 @@
+#!/bin/bash
+
+ERROR_FLAG=0
+
+fin phpcs -q
+
+if [[ $? == 0 ]]
+then
+  echo "ok";
+else
+    echo "Fix the errors before commit."
+    ERROR_FLAG=1
+fi
+
+exit ${ERROR_FLAG}

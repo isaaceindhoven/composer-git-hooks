@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Run PHPCS
+## Usage: fin phpcs [phpcs params]
+
+CACHE_FILE=var/cache/phpcs.cache
+mkdir -p $(dirname "${PROJECT_ROOT}/${CACHE_FILE}")
+
+fin exec php ./vendor/bin/phpcs --cache="${CACHE_FILE}" $@

@@ -1,0 +1,9 @@
+version: "2.1"
+
+services:
+  cli:
+    build:
+      context: services/cli
+    image: ${COMPOSE_PROJECT_NAME}_cli
+    volumes:
+      - ${HOME}/.composer/auth.json:/home/docker/.composer/auth.json:ro

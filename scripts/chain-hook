@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+
+. $(dirname $(readlink "$0"))/git-hooks.sh
+
+CHAIN_RETURN_CODE=0
+
+HOOKNAME=$(basename $0)
+git_hooks::chain "${HOOKNAME}" || CHAIN_RETURN_CODE=$?
+
+if [ $CHAIN_RETURN_CODE -ne 0 ]; then
+  git_hooks::warning "Custom hook(s) exited with error code"
+fi
+
+exit $CHAIN_RETURN_CODE

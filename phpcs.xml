@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2018 ISAAC Software Solutions B.V. (https://www.isaac.nl)
+    License: proprietary
+ -->
+<ruleset name="phpcs-isaac">
+    <!-- only scan following -->
+    <file>src</file>
+    <file>bin/install-phpstorm-copyright</file>
+
+    <!-- extend isaac ruleset -->
+    <rule ref="ISAAC">
+        <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>
+    </rule>
+</ruleset>

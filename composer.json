@@ -4,7 +4,7 @@
     "type": "composer-plugin",
     "license": "proprietary",
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
         "composer-plugin-api": "^1.1",
         "composer/composer": "^1.10"
     },
@@ -23,7 +23,7 @@
     "repositories": {
         "isaac-php-code-sniffer": {
             "type": "vcs",
-            "url": "git@gitlab.isaac.local:php-module/isaac-php-code-sniffer.git"
+            "url": "git@gitlab.isaac.local:php-module/isaac-composer-git-hooks.git"
         }
     },
     "extra": {

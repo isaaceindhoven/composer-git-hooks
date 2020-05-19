@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+const AUTOLOAD_PATHS = [
+    __DIR__ . '/vendor/autoload.php',
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../autoload.php',
+    __DIR__ . '/../../autoload.php',
+    '/var/www/vendor/autoload.php'
+];
+
+$autoloadPath = null;
+foreach (AUTOLOAD_PATHS as $path) {
+    if (file_exists($path)) {
+        $autoloadPath = $path;
+        break;
+    }
+}
+
+if (!$autoloadPath) {
+    echo 'Autoload file not found';
+    die(1);
+}
+
+require_once $autoloadPath;
+$logger = new \ISAAC\ComposerGitHooks\StdLogger();
+$fileSystem = new \ISAAC\ComposerGitHooks\FileSystem($logger);
+$gitHooks = new \ISAAC\ComposerGitHooks\GitHooks($logger, $fileSystem);
+$gitHooks->install();

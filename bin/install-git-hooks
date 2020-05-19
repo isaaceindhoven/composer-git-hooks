@@ -8,7 +8,8 @@ const AUTOLOAD_PATHS = [
     __DIR__ . '/../vendor/autoload.php',
     __DIR__ . '/../autoload.php',
     __DIR__ . '/../../autoload.php',
-    '/var/www/vendor/autoload.php'
+    __DIR__ . '/../../../autoload.php',
+    __DIR__ . '/../../../../autoload.php',
 ];
 
 $autoloadPath = null;

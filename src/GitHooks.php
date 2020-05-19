@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace ISAAC\ComposerGitHooks;
 
 use function file_exists;
+use function getcwd;
+use function mkdir;
+use function readlink;
+use function sprintf;
+use function symlink;
 
 class GitHooks
 {
@@ -56,7 +61,7 @@ class GitHooks
         self::symlinkHooks();
         self::createProjectHookDirectories();
 
-        $this->logger->writeInfo('Done updating git-hooks');
+        $this->logger->writeInfo('Updated git-hooks');
     }
 
     private function symlinkHooks(): void
@@ -72,8 +77,7 @@ class GitHooks
                     $link
                 );
                 $this->logger->writeInfo('Created symlink ' . $link . ' -> ' . $relativeTarget);
-            }
-            else if (!readlink($link) || readlink($link) !== $relativeTarget) {
+            } elseif (!readlink($link) || readlink($link) !== $relativeTarget) {
                 $this->logger->writeError(sprintf('Git hook %s already exists, not using project hooks.
                     Consider moving your custom hook to %s.', $link, self::PROJECT_HOOKS_DIRECTORY));
             }

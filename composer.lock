@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e64d363750911f97a9a0661e96bc7457",
+    "content-hash": "aad45095f226ade3c079e99bd07396bd",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1132,6 +1132,42 @@
             ],
             "description": "ISAAC PHP_CodeSniffer Standard",
             "time": "2020-05-19T07:22:56+00:00"
+        },
+        {
+            "name": "isaac/phpstorm-copyright",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.isaac.local:php-module/isaac-phpstorm-copyright.git",
+                "reference": "023f718c530e47a9e05177c2f9b33a3a7cc5b33c"
+            },
+            "require": {
+                "composer-plugin-api": "^1.1",
+                "composer/composer": "^1.10",
+                "ext-simplexml": "*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "isaac/php-code-sniffer": "^12.0",
+                "phpstan/phpstan": "^0.11"
+            },
+            "bin": [
+                "bin/install-phpstorm-copyright"
+            ],
+            "type": "composer-plugin",
+            "extra": {
+                "class": "ISAAC\\PhpStormCopyright\\ComposerPlugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "ISAAC\\PhpStormCopyright\\": "src/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "ISAAC PhpStorm Copyright Settings",
+            "time": "2020-05-08T16:24:47+00:00"
         },
         {
             "name": "nette/utils",

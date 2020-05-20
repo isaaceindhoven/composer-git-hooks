@@ -10,7 +10,8 @@
     },
     "require-dev": {
         "isaac/php-code-sniffer-standard": "^17.0",
-        "phpstan/phpstan": "^0.12"
+        "phpstan/phpstan": "^0.12",
+        "isaac/phpstorm-copyright": "^1.0"
     },
     "bin": [
       "bin/install-git-hooks"
@@ -24,6 +25,10 @@
         "isaac-php-code-sniffer": {
             "type": "vcs",
             "url": "git@gitlab.isaac.local:php-module/isaac-php-code-sniffer-standard.git"
+        },
+        "isaac/phpstorm-copyright": {
+            "type": "vcs",
+            "url": "git@gitlab.isaac.local:php-module/isaac-phpstorm-copyright.git"
         }
     },
     "extra": {

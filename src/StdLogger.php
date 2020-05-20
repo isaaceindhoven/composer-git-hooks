@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Do not remove or alter the notices in this preamble.
  * This software code regards ISAAC Standard Software.

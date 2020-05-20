@@ -1,0 +1,37 @@
+{
+    "name": "isaac/composer-git-hooks",
+    "description": "ISAAC Composer Git Hooks",
+    "type": "composer-plugin",
+    "license": "proprietary",
+    "require": {
+        "php": "^7.3",
+        "composer-plugin-api": "^1.1",
+        "composer/composer": "^1.10"
+    },
+    "require-dev": {
+        "isaac/php-code-sniffer-standard": "^17.0",
+        "phpstan/phpstan": "^0.12",
+        "isaac/phpstorm-copyright": "^1.0"
+    },
+    "bin": [
+      "bin/install-git-hooks"
+    ],
+    "autoload": {
+        "psr-4": {
+            "ISAAC\\ComposerGitHooks\\": "src/"
+        }
+    },
+    "repositories": {
+        "isaac-php-code-sniffer": {
+            "type": "vcs",
+            "url": "git@gitlab.isaac.local:php-module/isaac-php-code-sniffer-standard.git"
+        },
+        "isaac/phpstorm-copyright": {
+            "type": "vcs",
+            "url": "git@gitlab.isaac.local:php-module/isaac-phpstorm-copyright.git"
+        }
+    },
+    "extra": {
+        "class": "ISAAC\\ComposerGitHooks\\ComposerPlugin"
+    }
+}

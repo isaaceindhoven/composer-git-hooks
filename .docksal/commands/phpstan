@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Runs phpstan
+##
+## Usage: fin phpstan [params to passthrough]
+
+fin exec php ./vendor/bin/phpstan analyse -c phpstan.neon $@

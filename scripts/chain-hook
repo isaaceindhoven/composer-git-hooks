@@ -19,6 +19,11 @@ function git_hooks::chain() {
     local returnCode=0
 
     for customHookPath in ${customHookDir}/*; do
+      if [ ! -x $customHookPath ]; then
+        git_hooks::warning "Script ${customHookPath} not executable"
+        continue
+      fi
+
       git_hooks::info "Running custom git hook: ${customHookPath}"
 
       local hookExitCode=0

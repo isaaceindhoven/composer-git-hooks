@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace ISAAC\ComposerGitHooks;
 
+use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
+
 use function array_pad;
 use function array_shift;
 use function copy;
@@ -20,6 +22,7 @@ use function count;
 use function dir;
 use function explode;
 use function file_exists;
+use function getcwd;
 use function implode;
 use function is_dir;
 use function is_file;
@@ -36,13 +39,22 @@ class FileSystem
 {
     private const DIR_PERMISSIONS = 0755;
 
-    /** @var LoggerInterface */
+    /** @var Logger */
     private $logger;
 
     public function __construct(
-        LoggerInterface $logger
+        Logger $logger
     ) {
         $this->logger = $logger;
+    }
+
+    public function getProjectRoot(): string
+    {
+        $projectRoot = getcwd();
+        if (!$projectRoot) {
+            throw new ProjectRootNotFoundException();
+        }
+        return $projectRoot;
     }
 
     // phpcs:ignore ObjectCalisthenics.Files.FunctionLength.ObjectCalisthenics\Sniffs\Files\FunctionLengthSniff
@@ -93,15 +105,13 @@ class FileSystem
         }
     }
 
-    protected function performRecursive(string $source, string $dest, FileSystemActionInterface $action): bool
+    protected function performRecursive(string $source, string $dest, FileSystemAction $action): bool
     {
         if (is_link($source)) {
             return readlink($source) !== false ? symlink(readlink($source), $dest) : false;
-        }
-        if (is_file($source)) {
+        } elseif (is_file($source)) {
             return $action->invoke($source, $dest);
-        }
-        if (!is_dir($dest)) {
+        } elseif (!is_dir($dest)) {
             mkdir($dest, self::DIR_PERMISSIONS);
         }
 
@@ -122,7 +132,7 @@ class FileSystem
 
     public function copyRecursive(string $source, string $dest): bool
     {
-        return $this->performRecursive($source, $dest, new class implements FileSystemActionInterface {
+        return $this->performRecursive($source, $dest, new class implements FileSystemAction {
             public function invoke(string $source, string $dest): bool
             {
                 return copy($source, $dest);
@@ -132,7 +142,7 @@ class FileSystem
 
     public function symlinkRecursive(string $source, string $dest): bool
     {
-        return $this->performRecursive($source, $dest, new class ($this) implements FileSystemActionInterface {
+        return $this->performRecursive($source, $dest, new class ($this) implements FileSystemAction {
             /** @var FileSystem */
             private $fileSystem;
 

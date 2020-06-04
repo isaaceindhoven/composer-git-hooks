@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace ISAAC\ComposerGitHooks;
 
+use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
+
 use function file_exists;
-use function getcwd;
-use function mkdir;
 use function readlink;
 use function sprintf;
 use function symlink;
@@ -44,31 +44,44 @@ class GitHooks
     ];
     public const GIT_HOOKS_DIRECTORY = '.git/hooks';
     public const PROJECT_HOOKS_DIRECTORY = 'bin/git-hooks';
+    public const PROJECT_DEFAULT_HOOK_DIRECTORIES = [
+        'pre-commit',
+    ];
     public const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
 
-    /** @var LoggerInterface */
+    /** @var Logger */
     private $logger;
 
     /** @var FileSystem */
     private $fileSystem;
 
+    /** @var string */
+    private $projectRoot;
+
     public function __construct(
-        LoggerInterface $logger,
+        Logger $logger,
         FileSystem $fileSystem
     ) {
         $this->logger = $logger;
         $this->fileSystem = $fileSystem;
+
+        try {
+            $this->projectRoot = $this->fileSystem->getProjectRoot();
+        } catch (ProjectRootNotFoundException $e) {
+            $this->logger->writeError('No project root found');
+            exit(1);
+        }
     }
 
     public function install(): void
     {
-        if (!file_exists('.git')) {
-            $this->logger->writeError('No .git directory found in ' . getcwd());
+        if (!file_exists(sprintf('%s/.git', $this->projectRoot))) {
+            $this->logger->writeError(sprintf('No .git directory found in %s', $this->projectRoot));
             return;
         }
 
-        self::symlinkHooks();
-        self::createProjectHookDirectories();
+        $this->symlinkHooks();
+        $this->createProjectHookDirectories();
 
         $this->logger->writeInfo('Updated git-hooks');
     }
@@ -76,8 +89,8 @@ class GitHooks
     private function symlinkHooks(): void
     {
         foreach (self::HOOKS as $hook) {
-            $target = __DIR__ . '/../' . self::CHAIN_HOOK_FILENAME;
-            $link = getcwd() . '/' . self::GIT_HOOKS_DIRECTORY . '/' . $hook;
+            $target = sprintf('%s/../%s', __DIR__, self::CHAIN_HOOK_FILENAME);
+            $link = sprintf('%s/%s/%s', $this->projectRoot, self::GIT_HOOKS_DIRECTORY, $hook);
             $relativeTarget = $this->fileSystem->getRelativePath($link, $target);
 
             if (!file_exists($link)) {
@@ -85,7 +98,7 @@ class GitHooks
                     $relativeTarget,
                     $link
                 );
-                $this->logger->writeInfo('Created symlink ' . $link . ' -> ' . $relativeTarget);
+                $this->logger->writeInfo(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
             } elseif (!readlink($link) || readlink($link) !== $relativeTarget) {
                 $this->logger->writeError(sprintf('Git hook %s already exists, not using project hooks.
                     Consider moving your custom hook to %s.', $link, self::PROJECT_HOOKS_DIRECTORY));
@@ -95,11 +108,11 @@ class GitHooks
 
     private function createProjectHookDirectories(): void
     {
-        foreach (self::HOOKS as $hook) {
-            $directory = getcwd() . '/' . self::PROJECT_HOOKS_DIRECTORY . '/' . $hook . '.d';
+        foreach (self::PROJECT_DEFAULT_HOOK_DIRECTORIES as $hook) {
+            $directory = sprintf('%s/%s/%s.d', $this->projectRoot, self::PROJECT_HOOKS_DIRECTORY, $hook);
             if (!file_exists($directory)) {
-                mkdir($directory);
-                $this->logger->writeInfo('Created directory ' . $directory);
+                $this->fileSystem->createDirectoryIfNotExists($directory);
+                $this->logger->writeInfo(sprintf('Created directory %s', $directory));
             }
         }
     }

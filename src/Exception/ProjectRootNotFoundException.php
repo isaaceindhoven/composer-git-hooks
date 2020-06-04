@@ -11,9 +11,10 @@
 
 declare(strict_types=1);
 
-namespace ISAAC\ComposerGitHooks;
+namespace ISAAC\ComposerGitHooks\Exception;
 
-interface FileSystemActionInterface
+use Exception;
+
+class ProjectRootNotFoundException extends Exception
 {
-    public function invoke(string $source, string $dest): bool;
 }

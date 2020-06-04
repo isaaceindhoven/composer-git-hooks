@@ -1,10 +1,14 @@
 {
     "name": "isaac/composer-git-hooks",
-    "description": "ISAAC Composer Git Hooks",
     "type": "composer-plugin",
     "license": "proprietary",
+    "description": "ISAAC Composer Git Hooks",
+    "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true
+    },
     "require": {
-        "php": "^7.3",
+        "php": "~7.2.0 || ~7.3.0",
         "composer-plugin-api": "^1.1",
         "composer/composer": "^1.10"
     },
@@ -14,7 +18,7 @@
         "isaac/phpstorm-copyright": "^1.0"
     },
     "bin": [
-      "bin/install-git-hooks"
+        "bin/install-git-hooks"
     ],
     "autoload": {
         "psr-4": {

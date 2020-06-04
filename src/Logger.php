@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ISAAC\ComposerGitHooks;
 
-interface LoggerInterface
+interface Logger
 {
     public function writeInfo(string $message): void;
 

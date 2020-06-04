@@ -10,9 +10,8 @@
 <ruleset name="phpcs-isaac">
     <!-- only scan following -->
     <file>src</file>
+    <file>bin/install-git-hooks</file>
 
     <!-- extend isaac ruleset -->
-    <rule ref="ISAAC">
-        <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>
-    </rule>
+    <rule ref="ISAAC"></rule>
 </ruleset>

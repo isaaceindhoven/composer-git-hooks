@@ -3,6 +3,10 @@
 
 declare(strict_types=1);
 
+use ISAAC\ComposerGitHooks\FileSystem;
+use ISAAC\ComposerGitHooks\GitHooks;
+use ISAAC\ComposerGitHooks\StdLogger;
+
 const AUTOLOAD_PATHS = [
     __DIR__ . '/vendor/autoload.php',
     __DIR__ . '/../vendor/autoload.php',
@@ -22,11 +26,11 @@ foreach (AUTOLOAD_PATHS as $path) {
 
 if (!$autoloadPath) {
     echo 'Autoload file not found';
-    die(1);
+    exit(1);
 }
 
 require_once $autoloadPath;
-$logger = new \ISAAC\ComposerGitHooks\StdLogger();
-$fileSystem = new \ISAAC\ComposerGitHooks\FileSystem($logger);
-$gitHooks = new \ISAAC\ComposerGitHooks\GitHooks($logger, $fileSystem);
+$logger = new StdLogger();
+$fileSystem = new FileSystem($logger);
+$gitHooks = new GitHooks($logger, $fileSystem);
 $gitHooks->install();

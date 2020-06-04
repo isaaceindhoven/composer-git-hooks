@@ -12,7 +12,6 @@ function git_hooks::chain() {
     local customHookDir="bin/git-hooks/${gitHook}.d"
 
     if [ ! -d $customHookDir ]; then
-        git_hooks::info "No custom hook dir $customHookDir"
         return 0
     fi
 
@@ -39,7 +38,7 @@ function git_hooks::chain() {
 }
 
 function git_hooks::info() {
-    echo -e "\033[0;32m$1\033[0m"
+    echo -e "\e32m$1\033[0m"
 }
 
 function git_hooks::warning() {

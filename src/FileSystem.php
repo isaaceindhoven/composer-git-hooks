@@ -95,13 +95,15 @@ class FileSystem
     {
         if (!file_exists($directory)) {
             if (!mkdir($directory, self::DIR_PERMISSIONS, true)) {
-                $this->logger->writeError('Failed to create ' . $directory . ' directory');
+                $this->logger->writeError(sprintf('Failed to create %s', $directory));
                 exit(1);
             }
 
-            $this->logger->writeInfo('Created ' . $directory);
+            $this->logger->writeInfo(sprintf('Created directory %s', $directory));
+        } elseif (!is_dir($directory)) {
+            $this->logger->writeError(sprintf('%s exists but is not a directory', $directory));
         } else {
-            $this->logger->writeInfo(sprintf('Directory %s skipped because it already exists', $directory));
+            $this->logger->writeInfo(sprintf('Not creating directory %s because it already exists', $directory));
         }
     }
 

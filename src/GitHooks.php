@@ -110,9 +110,7 @@ class GitHooks
     {
         foreach (self::PROJECT_DEFAULT_HOOK_DIRECTORIES as $hook) {
             $directory = sprintf('%s/%s/%s.d', $this->projectRoot, self::PROJECT_HOOKS_DIRECTORY, $hook);
-            if (!file_exists($directory)) {
-                $this->fileSystem->createDirectoryIfNotExists($directory);
-            }
+            $this->fileSystem->createDirectoryIfNotExists($directory);
         }
     }
 }

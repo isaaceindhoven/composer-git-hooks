@@ -112,7 +112,6 @@ class GitHooks
             $directory = sprintf('%s/%s/%s.d', $this->projectRoot, self::PROJECT_HOOKS_DIRECTORY, $hook);
             if (!file_exists($directory)) {
                 $this->fileSystem->createDirectoryIfNotExists($directory);
-                $this->logger->writeInfo(sprintf('Created directory %s', $directory));
             }
         }
     }

@@ -17,7 +17,7 @@ use Composer\IO\IOInterface;
 
 use function sprintf;
 
-class ComposerLogger implements LoggerInterface
+class ComposerLogger implements Logger
 {
     /** @var IOInterface */
     private $io;
@@ -34,6 +34,6 @@ class ComposerLogger implements LoggerInterface
 
     public function writeError(string $message): void
     {
-        $this->io->writeError(sprintf('<info>isaac/composer-git-hooks (ERROR):</info> %s', $message));
+        $this->io->writeError(sprintf('<error>isaac/composer-git-hooks (ERROR):</error> %s', $message));
     }
 }

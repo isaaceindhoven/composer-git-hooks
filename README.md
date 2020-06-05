@@ -4,7 +4,7 @@ Set up the .git/hooks folder to run scripts found in the `bin/git-hooks/{hookNam
 How it works:
 1. Include the package as a dev dependency
 2. On composer install/update, all git hooks (.git/hooks/{pre-commit,post-commit,...}) will be symlinked to this module's `scripts/chain-hook`.
-3. The `chain-hook` script will run the scripts found in the project's `bin/git-hook/{hookName}.d` folder.
+3. The `chain-hook` script will run the scripts found in the project's `bin/git-hooks/{hookName}.d` folder.
 
 ## Prerequisites
 - A composer-managed project
@@ -19,7 +19,7 @@ composer config repositories.isaac/composer-git-hooks vcs git@gitlab.isaac.local
 Add the package as a dev dependency.
 
 ```bash
-composer require --dev "isaac/composer-git-hooks"
+composer require --dev isaac/composer-git-hooks
 ```
 
 ## Usage

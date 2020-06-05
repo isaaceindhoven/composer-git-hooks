@@ -1,9 +1,11 @@
 #!/bin/bash
+#: exec_target = cli
+#
+# Runs phpcs
+# Usage: fin phpcs [params to passthrough]
 
-## Run PHPCS
-## Usage: fin phpcs [phpcs params]
+set -eo pipefail
 
-CACHE_FILE=var/cache/phpcs.cache
-mkdir -p $(dirname "${PROJECT_ROOT}/${CACHE_FILE}")
-
-fin exec php ./vendor/bin/phpcs --cache="${CACHE_FILE}" $@
+CACHE_FILE=${PROJECT_ROOT}/var/cache/dev/phpcs.cache
+mkdir -p $(dirname "${CACHE_FILE}")
+${PROJECT_ROOT}/vendor/bin/phpcs --cache="${CACHE_FILE}" --basepath="${PROJECT_ROOT}" "${@}"

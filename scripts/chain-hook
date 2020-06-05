@@ -12,13 +12,17 @@ function git_hooks::chain() {
     local customHookDir="bin/git-hooks/${gitHook}.d"
 
     if [ ! -d $customHookDir ]; then
-        git_hooks::info "No custom hook dir $customHookDir"
         return 0
     fi
 
     local returnCode=0
 
     for customHookPath in ${customHookDir}/*; do
+      if [ ! -x $customHookPath ]; then
+        git_hooks::warning "Script ${customHookPath} not executable"
+        continue
+      fi
+
       git_hooks::info "Running custom git hook: ${customHookPath}"
 
       local hookExitCode=0
@@ -34,7 +38,7 @@ function git_hooks::chain() {
 }
 
 function git_hooks::info() {
-    echo -e "\033[0;32m$1\033[0m"
+    echo -e "\e32m$1\033[0m"
 }
 
 function git_hooks::warning() {

@@ -38,11 +38,11 @@ function git_hooks::chain() {
 }
 
 function git_hooks::info() {
-    echo -e "\e32m$1\033[0m"
+    echo -e "\e[32m$1\e[0m"
 }
 
 function git_hooks::warning() {
-    echo -e "\033[0;31m$1\033[0m" >&2
+    echo -e "\e[31m$1\e[0m" >&2
 }
 
 CHAIN_RETURN_CODE=0

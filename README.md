@@ -1,5 +1,5 @@
 # ISAAC Composer Git Hooks
-Set up the .git/hooks folder to run scripts found in the `bin/git-hooks/{hookName}.d` folders of the project.
+Set up the `.git/hooks` folder to run scripts found in the `bin/git-hooks/{hookName}.d` folders of the project.
 
 How it works:
 1. Include the package as a dev dependency
@@ -29,9 +29,9 @@ Add project specific git-hooks to `bin/git-hooks/{hookName}.d`. For example:
 
 All scripts (for in this case `pre-commit`) should give a 0 exit code for the whole hook to succeed.
 
-See this module's `standard-hooks` directory for example hooks. When using these scripts as-is it is recommended to symlink them:
+See this module's `standard-hooks` directory for example hooks. When using these scripts as-is it is recommended to symlink them. Run this from the project root:
 ```shell script
-ln -s vendor/isaac/composer-git-hooks/standard-hooks/pre-commit.d/phpcs bin/git-hooks/pre-commit.d/phpcs
+ln -s ../../../vendor/isaac/composer-git-hooks/standard-hooks/pre-commit.d/phpcs bin/git-hooks/pre-commit.d/phpcs
 ```
 
 ## Contribute

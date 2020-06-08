@@ -17,9 +17,6 @@
         "phpstan/phpstan": "^0.12",
         "isaac/phpstorm-copyright": "^1.0"
     },
-    "bin": [
-        "bin/install-git-hooks"
-    ],
     "autoload": {
         "psr-4": {
             "ISAAC\\ComposerGitHooks\\": "src/"

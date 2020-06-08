@@ -38,7 +38,7 @@ class ComposerPlugin implements PluginInterface, EventSubscriberInterface
         ];
     }
 
-    public function process(Event $event): void
+    public static function process(Event $event): void
     {
         $io = $event->getIO();
 

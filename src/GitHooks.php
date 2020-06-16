@@ -22,7 +22,7 @@ use function symlink;
 
 class GitHooks
 {
-    public const HOOKS = [
+    private const HOOKS = [
         'applypatch-msg',
         'commit-msg',
         'fsmonitor-watchman',
@@ -42,12 +42,12 @@ class GitHooks
         'prepare-commit-msg',
         'sendemail-validate',
     ];
-    public const GIT_HOOKS_DIRECTORY = '.git/hooks';
-    public const PROJECT_HOOKS_DIRECTORY = 'bin/git-hooks';
-    public const PROJECT_DEFAULT_HOOK_DIRECTORIES = [
+    private const GIT_HOOKS_DIRECTORY = '.git/hooks';
+    private const PROJECT_HOOKS_DIRECTORY = 'bin/git-hooks';
+    private const PROJECT_DEFAULT_HOOK_DIRECTORIES = [
         'pre-commit',
     ];
-    public const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
+    private const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
 
     /** @var Logger */
     private $logger;

@@ -1,8 +1,8 @@
 #!/bin/bash
 #: exec_target = cli
 #
-# Runs phpstan
-# Usage: fin phpstan [params to passthrough]
+## Runs phpstan
+## Usage: fin phpstan [params to passthrough]
 
 set -eo pipefail
 

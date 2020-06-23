@@ -15,8 +15,6 @@ function git_hooks::chain() {
         return 0
     fi
 
-    local returnCode=0
-
     for customHookPath in ${customHookDir}/*; do
       if [ ! -x $customHookPath ]; then
         git_hooks::warning "Script ${customHookPath} not executable"
@@ -30,11 +28,11 @@ function git_hooks::chain() {
 
       if [ $hookExitCode -ne 0 ]; then
         git_hooks::warning "Script ${customHookPath} returned exit code $hookExitCode"
-        returnCode=1
+        return $hookExitCode
       fi
     done
 
-    return $returnCode
+    return 0
 }
 
 function git_hooks::info() {

@@ -15,6 +15,7 @@ namespace ISAAC\ComposerGitHooks;
 
 use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
 
+use function chmod;
 use function file_exists;
 use function is_link;
 use function readlink;
@@ -100,6 +101,8 @@ class GitHooks
                     $relativeTarget,
                     $link
                 );
+                $this->setExecutable($link);
+                $this->setExecutable($relativeTarget);
                 $this->logger->writeInfo(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
             } elseif (!is_link($link) || !readlink($link) || readlink($link) !== $relativeTarget) {
                 $this->logger->writeWarning(sprintf('Git hook %s already exists, not using project hooks. ' .
@@ -113,6 +116,13 @@ class GitHooks
         foreach (self::PROJECT_DEFAULT_HOOK_DIRECTORIES as $hook) {
             $directory = sprintf('%s/%s/%s.d', $this->projectRoot, self::PROJECT_HOOKS_DIRECTORY, $hook);
             $this->fileSystem->createDirectoryIfNotExists($directory);
+        }
+    }
+
+    private function setExecutable(string $filepath): void
+    {
+        if (chmod($filepath, 0755) === false) {
+            $this->logger->writeError(sprintf('Failed to make %s executable', $filepath));
         }
     }
 }

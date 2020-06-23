@@ -101,7 +101,7 @@ class GitHooks
                     $relativeTarget,
                     $link
                 );
-                $this->setExecutable($link);
+                $this->setPermissions($link);
                 $this->logger->writeInfo(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
             } elseif (!is_link($link) || !readlink($link) || readlink($link) !== $relativeTarget) {
                 $this->logger->writeWarning(sprintf('Git hook %s already exists, not using project hooks. ' .
@@ -118,10 +118,10 @@ class GitHooks
         }
     }
 
-    private function setExecutable(string $filepath): void
+    private function setPermissions(string $filepath): void
     {
         if (chmod($filepath, 0755) === false) {
-            $this->logger->writeError(sprintf('Failed to make %s executable', $filepath));
+            $this->logger->writeError(sprintf('Failed to set permissions on %s', $filepath));
         }
     }
 }

@@ -102,7 +102,6 @@ class GitHooks
                     $link
                 );
                 $this->setExecutable($link);
-                $this->setExecutable($relativeTarget);
                 $this->logger->writeInfo(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
             } elseif (!is_link($link) || !readlink($link) || readlink($link) !== $relativeTarget) {
                 $this->logger->writeWarning(sprintf('Git hook %s already exists, not using project hooks. ' .

@@ -16,6 +16,7 @@ namespace ISAAC\ComposerGitHooks;
 use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
 
 use function file_exists;
+use function is_link;
 use function readlink;
 use function sprintf;
 use function symlink;
@@ -67,6 +68,7 @@ class GitHooks
 
         try {
             $this->projectRoot = $this->fileSystem->getProjectRoot();
+            $this->logger->writeInfo(sprintf('Using project root %s', $this->projectRoot));
         } catch (ProjectRootNotFoundException $e) {
             $this->logger->writeError('No project root found');
             exit(1);

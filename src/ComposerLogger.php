@@ -34,6 +34,11 @@ class ComposerLogger implements Logger
 
     public function writeError(string $message): void
     {
-        $this->io->writeError(sprintf('<error>isaac/composer-git-hooks (ERROR):</error> %s', $message));
+        $this->io->writeError(sprintf('<error>isaac/composer-git-hooks (error):</error> %s', $message));
+    }
+
+    public function writeWarning(string $message): void
+    {
+        $this->io->writeError(sprintf('<warning>isaac/composer-git-hooks (warning):</warning> %s', $message));
     }
 }

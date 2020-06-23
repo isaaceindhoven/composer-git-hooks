@@ -99,9 +99,9 @@ class GitHooks
                     $link
                 );
                 $this->logger->writeInfo(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
-            } elseif (!readlink($link) || readlink($link) !== $relativeTarget) {
-                $this->logger->writeError(sprintf('Git hook %s already exists, not using project hooks.
-                    Consider moving your custom hook to %s.', $link, self::PROJECT_HOOKS_DIRECTORY));
+            } elseif (!is_link($link) || !readlink($link) || readlink($link) !== $relativeTarget) {
+                $this->logger->writeWarning(sprintf('Git hook %s already exists, not using project hooks. ' .
+                    'Consider moving your custom hook to %s.', $link, self::PROJECT_HOOKS_DIRECTORY));
             }
         }
     }

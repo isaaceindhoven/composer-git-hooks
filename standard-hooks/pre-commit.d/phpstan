@@ -2,4 +2,14 @@
 
 set -euo pipefail
 
+# There is no 'readlink -f' on mac so we use python instead
+DIR=$(python -c "import os; print os.path.realpath('$0');");
+DIR=$(dirname $DIR)
+source $DIR/shared.sh
+
+if ! docksal::custom_command_exists "phpstan"; then
+  echo "Missing phpstan docksal custom command"
+  exit 0
+fi
+
 fin phpstan -q

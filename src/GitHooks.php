@@ -96,7 +96,7 @@ class GitHooks
             $link = sprintf('%s/%s/%s', $this->projectRoot, self::GIT_HOOKS_DIRECTORY, $hook);
             $relativeTarget = $this->fileSystem->getRelativePath($link, $target);
 
-            if (!file_exists($link)) {
+            if (!is_link($link) && !file_exists($link)) {
                 symlink(
                     $relativeTarget,
                     $link

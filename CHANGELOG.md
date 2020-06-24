@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2020-06-24
+### Fixed
+- Fixed symlink error when there already exists a .git/hooks symlink, but its target does not exist.
+
 ## [0.1.0] - 2020-06-24
 ### Added
 - The package will now not only check the composer working directory for a .git folder, but also any parent directories.

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2020-06-24
+### Fixed
+- In some cases, the chain-hook script in the package folder did not have executable permissions. On install we now ensure the chain-hook script has the correct permissions.
+
 ## [0.1.1] - 2020-06-24
 ### Fixed
 - Fixed symlink error when there already exists a .git/hooks symlink, but its target does not exist.

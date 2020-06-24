@@ -91,8 +91,10 @@ class GitHooks
 
     private function symlinkHooks(): void
     {
+        $target = sprintf('%s/../%s', __DIR__, self::CHAIN_HOOK_FILENAME);
+        $this->setPermissions($target); // Ensure the chain-hook script has the correct permissions
+
         foreach (self::HOOKS as $hook) {
-            $target = sprintf('%s/../%s', __DIR__, self::CHAIN_HOOK_FILENAME);
             $link = sprintf('%s/%s/%s', $this->projectRoot, self::GIT_HOOKS_DIRECTORY, $hook);
             $relativeTarget = $this->fileSystem->getRelativePath($link, $target);
 

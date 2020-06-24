@@ -15,14 +15,16 @@ namespace ISAAC\ComposerGitHooks;
 
 use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
 
+use function chmod;
 use function file_exists;
+use function is_link;
 use function readlink;
 use function sprintf;
 use function symlink;
 
 class GitHooks
 {
-    public const HOOKS = [
+    private const HOOKS = [
         'applypatch-msg',
         'commit-msg',
         'fsmonitor-watchman',
@@ -42,12 +44,12 @@ class GitHooks
         'prepare-commit-msg',
         'sendemail-validate',
     ];
-    public const GIT_HOOKS_DIRECTORY = '.git/hooks';
-    public const PROJECT_HOOKS_DIRECTORY = 'bin/git-hooks';
-    public const PROJECT_DEFAULT_HOOK_DIRECTORIES = [
+    private const GIT_HOOKS_DIRECTORY = '.git/hooks';
+    private const PROJECT_HOOKS_DIRECTORY = 'bin/git-hooks';
+    private const PROJECT_DEFAULT_HOOK_DIRECTORIES = [
         'pre-commit',
     ];
-    public const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
+    private const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
 
     /** @var Logger */
     private $logger;
@@ -67,6 +69,7 @@ class GitHooks
 
         try {
             $this->projectRoot = $this->fileSystem->getProjectRoot();
+            $this->logger->writeInfo(sprintf('Using project root %s', $this->projectRoot));
         } catch (ProjectRootNotFoundException $e) {
             $this->logger->writeError('No project root found');
             exit(1);
@@ -98,10 +101,11 @@ class GitHooks
                     $relativeTarget,
                     $link
                 );
+                $this->setPermissions($link);
                 $this->logger->writeInfo(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
-            } elseif (!readlink($link) || readlink($link) !== $relativeTarget) {
-                $this->logger->writeError(sprintf('Git hook %s already exists, not using project hooks.
-                    Consider moving your custom hook to %s.', $link, self::PROJECT_HOOKS_DIRECTORY));
+            } elseif (!is_link($link) || !readlink($link) || readlink($link) !== $relativeTarget) {
+                $this->logger->writeWarning(sprintf('Git hook %s already exists, not using project hooks. ' .
+                    'Consider moving your custom hook to %s.', $link, self::PROJECT_HOOKS_DIRECTORY));
             }
         }
     }
@@ -111,6 +115,13 @@ class GitHooks
         foreach (self::PROJECT_DEFAULT_HOOK_DIRECTORIES as $hook) {
             $directory = sprintf('%s/%s/%s.d', $this->projectRoot, self::PROJECT_HOOKS_DIRECTORY, $hook);
             $this->fileSystem->createDirectoryIfNotExists($directory);
+        }
+    }
+
+    private function setPermissions(string $filepath): void
+    {
+        if (chmod($filepath, 0755) === false) {
+            $this->logger->writeError(sprintf('Failed to set permissions on %s', $filepath));
         }
     }
 }

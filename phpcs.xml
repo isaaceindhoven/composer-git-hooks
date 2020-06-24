@@ -10,7 +10,6 @@
 <ruleset name="phpcs-isaac">
     <!-- only scan following -->
     <file>src</file>
-    <file>bin/install-git-hooks</file>
 
     <!-- extend isaac ruleset -->
     <rule ref="ISAAC"></rule>

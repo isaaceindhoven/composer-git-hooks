@@ -11,14 +11,12 @@ function git_hooks::chain() {
     local gitHook=$1
     local customHookDir="bin/git-hooks/${gitHook}.d"
 
-    if [ ! -d $customHookDir ]; then
+    if [ ! -d "$customHookDir" ]; then
         return 0
     fi
 
-    local returnCode=0
-
-    for customHookPath in ${customHookDir}/*; do
-      if [ ! -x $customHookPath ]; then
+    for customHookPath in "${customHookDir}"/*; do
+      if [ ! -x "$customHookPath" ]; then
         git_hooks::warning "Script ${customHookPath} not executable"
         continue
       fi
@@ -30,24 +28,24 @@ function git_hooks::chain() {
 
       if [ $hookExitCode -ne 0 ]; then
         git_hooks::warning "Script ${customHookPath} returned exit code $hookExitCode"
-        returnCode=1
+        return $hookExitCode
       fi
     done
 
-    return $returnCode
+    return 0
 }
 
 function git_hooks::info() {
-    echo -e "\e[32m$1\e[0m"
+    echo -e "\033[0;32m$1\033[0m"
 }
 
 function git_hooks::warning() {
-    echo -e "\e[31m$1\e[0m" >&2
+    echo -e "\033[0;31m$1\033[0m" >&2
 }
 
 CHAIN_RETURN_CODE=0
 
-HOOKNAME=$(basename $0)
+HOOKNAME=$(basename "$0")
 git_hooks::chain "${HOOKNAME}" || CHAIN_RETURN_CODE=$?
 
 if [ $CHAIN_RETURN_CODE -ne 0 ]; then

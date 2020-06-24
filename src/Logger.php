@@ -18,4 +18,6 @@ interface Logger
     public function writeInfo(string $message): void;
 
     public function writeError(string $message): void;
+
+    public function writeWarning(string $message): void;
 }

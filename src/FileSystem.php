@@ -20,6 +20,7 @@ use function array_shift;
 use function copy;
 use function count;
 use function dir;
+use function dirname;
 use function explode;
 use function file_exists;
 use function getcwd;
@@ -48,12 +49,31 @@ class FileSystem
         $this->logger = $logger;
     }
 
+    /**
+     * @throws ProjectRootNotFoundException
+     */
     public function getProjectRoot(): string
     {
         $projectRoot = getcwd();
-        if (!$projectRoot) {
+        if ($projectRoot === false) {
             throw new ProjectRootNotFoundException();
         }
+
+        while (!file_exists(sprintf('%s/.git', $projectRoot))) {
+            $newProjectRoot = dirname($projectRoot);
+            if ($projectRoot === $newProjectRoot) {
+                // We cannot go up further
+                $projectRoot = null;
+                break;
+            }
+
+            $projectRoot = $newProjectRoot;
+        }
+
+        if ($projectRoot === null) {
+            throw new ProjectRootNotFoundException();
+        }
+
         return $projectRoot;
     }
 

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Added standard prepare-commit-msg hook
+- Added standard prepare-commit-msg hook to add the JIRA issue id
 
 ## [0.1.2] - 2020-06-24
 ### Fixed

@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace ISAAC\ComposerGitHooks;
 
+use FilesystemIterator;
 use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 use function chmod;
 use function file_exists;
@@ -50,6 +53,7 @@ class GitHooks
         'pre-commit',
     ];
     private const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
+    private const STANDARD_HOOK_DIRECTORY = 'standard-hooks';
 
     /** @var Logger */
     private $logger;
@@ -84,7 +88,8 @@ class GitHooks
         }
 
         $this->symlinkHooks();
-        $this->createProjectHookDirectories();
+        $this->createProjectDefaultHookDirectories();
+        $this->makeStandardHooksExecutable();
 
         $this->logger->writeInfo('Updated git-hooks');
     }
@@ -92,7 +97,7 @@ class GitHooks
     private function symlinkHooks(): void
     {
         $target = sprintf('%s/../%s', __DIR__, self::CHAIN_HOOK_FILENAME);
-        $this->setPermissions($target); // Ensure the chain-hook script has the correct permissions
+        $this->setExecutablePermission($target); // Ensure the chain-hook script has the correct permissions
 
         foreach (self::HOOKS as $hook) {
             $link = sprintf('%s/%s/%s', $this->projectRoot, self::GIT_HOOKS_DIRECTORY, $hook);
@@ -103,7 +108,7 @@ class GitHooks
                     $relativeTarget,
                     $link
                 );
-                $this->setPermissions($link);
+                $this->setExecutablePermission($link);
                 $this->logger->writeInfo(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
             } elseif (!is_link($link) || !readlink($link) || readlink($link) !== $relativeTarget) {
                 $this->logger->writeWarning(sprintf('Git hook %s already exists, not using project hooks. ' .
@@ -112,7 +117,7 @@ class GitHooks
         }
     }
 
-    private function createProjectHookDirectories(): void
+    private function createProjectDefaultHookDirectories(): void
     {
         foreach (self::PROJECT_DEFAULT_HOOK_DIRECTORIES as $hook) {
             $directory = sprintf('%s/%s/%s.d', $this->projectRoot, self::PROJECT_HOOKS_DIRECTORY, $hook);
@@ -120,10 +125,34 @@ class GitHooks
         }
     }
 
-    private function setPermissions(string $filepath): void
+    private function makeStandardHooksExecutable(): void
+    {
+        $standardHooksDirectory = sprintf('%s/../%s', __DIR__, self::STANDARD_HOOK_DIRECTORY);
+
+        $fileIterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($standardHooksDirectory, RecursiveDirectoryIterator::SKIP_DOTS)
+        );
+
+        /** @var FilesystemIterator $file */
+        foreach ($fileIterator as $file) {
+            if ($file->isDir() || ($file->getExtension() !== '' && $file->getExtension() !== 'sh')) {
+                continue;
+            }
+
+            if (!$file->isExecutable()) {
+                $this->setExecutablePermission($file->getPathname());
+                $this->logger->writeInfo(sprintf('Corrected permissions for standard hook %s', $file->getFilename()));
+            }
+        }
+    }
+
+    private function setExecutablePermission(string $filepath): bool
     {
         if (chmod($filepath, 0755) === false) {
             $this->logger->writeError(sprintf('Failed to set permissions on %s', $filepath));
+            return false;
         }
+
+        return true;
     }
 }

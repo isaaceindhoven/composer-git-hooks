@@ -9,13 +9,13 @@
     },
     "require": {
         "php": "~7.2.0 || ~7.3.0",
-        "composer-plugin-api": "^1.1",
-        "composer/composer": "^1.10"
+        "composer-plugin-api": "^1.1"
     },
     "require-dev": {
         "isaac/php-code-sniffer-standard": "^17.0",
         "phpstan/phpstan": "^0.12",
-        "isaac/phpstorm-copyright": "^1.0"
+        "isaac/phpstorm-copyright": "^1.0",
+        "composer/composer": "^1.10"
     },
     "autoload": {
         "psr-4": {
@@ -23,13 +23,9 @@
         }
     },
     "repositories": {
-        "isaac-php-code-sniffer": {
-            "type": "vcs",
-            "url": "git@gitlab.isaac.local:php-module/isaac-php-code-sniffer-standard.git"
-        },
-        "isaac/phpstorm-copyright": {
-            "type": "vcs",
-            "url": "git@gitlab.isaac.local:php-module/isaac-phpstorm-copyright.git"
+        "isaac": {
+            "type": "composer",
+            "url": "https://composer-packages.hq.isaac.nl/repository"
         }
     },
     "extra": {

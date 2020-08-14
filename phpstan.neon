@@ -2,4 +2,3 @@ parameters:
     level: max
     paths:
         - %currentWorkingDirectory%/src
-        - %currentWorkingDirectory%/bin

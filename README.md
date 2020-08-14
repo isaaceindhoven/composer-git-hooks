@@ -10,10 +10,10 @@ How it works:
 - A composer-managed project
 
 ## Install
-Add the repository to composer.
+Add the ISAAC repository to composer.
 
 ```bash
-composer config repositories.isaac/composer-git-hooks vcs git@gitlab.isaac.local:php-module/isaac-composer-git-hooks.git
+composer config repositories.isaac composer https://composer-packages.hq.isaac.nl/repository
 ```
 
 Add the package as a dev dependency.

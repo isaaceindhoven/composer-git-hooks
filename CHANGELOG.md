@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2020-08-14
+### Fixed
+- Depending on composer's installation method for the package (via source, via dist?), the standard-hooks would not get the correct executable permission. Added a check for this such that during composer install/update the correct permissions will be set.  
+
 ## [0.1.2] - 2020-06-24
 ### Fixed
 - In some cases, the chain-hook script in the package folder did not have executable permissions. On install we now ensure the chain-hook script has the correct permissions.

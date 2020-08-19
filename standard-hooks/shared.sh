@@ -19,7 +19,7 @@ function docksal::is_running() {
     git_hooks::warning "fin command not found"
   fi
 
-  fin exec ls &>/dev/null
+  fin exec : &>/dev/null
   return $?
 }
 function docksal::custom_command_exists() {

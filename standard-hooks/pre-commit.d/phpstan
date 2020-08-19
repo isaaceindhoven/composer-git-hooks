@@ -15,6 +15,6 @@ if docksal::is_running; then
 
   fin phpstan -q
 else
-  git_hooks::warning "Running phpstan on host, docksal project not up"
+  git_hooks::info "Running phpstan on host, docksal project not up"
   vendor/bin/phpstan analyse -q
 fi

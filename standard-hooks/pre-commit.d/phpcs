@@ -15,6 +15,6 @@ if docksal::is_running; then
 
   fin phpcs -q
 else
-  git_hooks::warning "Running phpcs on host, docksal project not up"
+  git_hooks::info "Running phpcs on host, docksal project not up"
   vendor/bin/phpcs -q
 fi

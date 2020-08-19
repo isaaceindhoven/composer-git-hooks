@@ -5,11 +5,16 @@ set -euo pipefail
 # There is no 'readlink -f' on mac so we use python instead
 DIR=$(python -c "import os; print os.path.realpath('$0');");
 DIR=$(dirname "$DIR")
-source "$DIR"/shared.sh
+source "$DIR"/../shared.sh
 
-if ! docksal::custom_command_exists "phpcs"; then
-  echo "Missing phpcs docksal custom command"
-  exit 0
+if docksal::is_running; then
+  if ! docksal::custom_command_exists "phpcs"; then
+    git_hooks::warning "Missing phpcs docksal custom command"
+    exit 0
+  fi
+
+  fin phpcs -q
+else
+  git_hooks::info "Running phpcs on host, docksal project not up"
+  vendor/bin/phpcs -q
 fi
-
-fin phpcs -q

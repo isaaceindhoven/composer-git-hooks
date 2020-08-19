@@ -138,7 +138,7 @@ class FileSystem
         }
 
         $dir = dir($source);
-        if (!$dir) {
+        if ($dir === false) {
             return false;
         }
 

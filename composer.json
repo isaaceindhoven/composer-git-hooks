@@ -8,14 +8,16 @@
         "sort-packages": true
     },
     "require": {
-        "php": "~7.2.0 || ~7.3.0",
+        "php": "~7.2.0 || ~7.3.0 || ~7.4.0",
         "composer-plugin-api": "^1.1"
     },
     "require-dev": {
+        "composer/composer": "^1.10",
         "isaac/php-code-sniffer-standard": "^17.0",
-        "phpstan/phpstan": "^0.12",
         "isaac/phpstorm-copyright": "^1.0",
-        "composer/composer": "^1.10"
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-strict-rules": "^0.12.4"
     },
     "scripts": {
         "post-install-cmd": "ISAAC\\ComposerGitHooks\\ComposerPlugin::process",

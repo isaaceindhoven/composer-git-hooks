@@ -9,8 +9,9 @@ set -euo pipefail
 #   1 If one of the scripts in the directory returned an error code.
 function git_hooks::chain() {
     local gitHook=$1
-    local customHookDir="bin/git-hooks/${gitHook}.d"
+    shift
 
+    local customHookDir="bin/git-hooks/${gitHook}.d"
     if [ ! -d "$customHookDir" ]; then
         return 0
     fi
@@ -46,7 +47,7 @@ function git_hooks::warning() {
 CHAIN_RETURN_CODE=0
 
 HOOKNAME=$(basename "$0")
-git_hooks::chain "${HOOKNAME}" || CHAIN_RETURN_CODE=$?
+git_hooks::chain "${HOOKNAME}" "$@" || CHAIN_RETURN_CODE=$?
 
 if [ $CHAIN_RETURN_CODE -ne 0 ]; then
   git_hooks::warning "Custom hook(s) exited with error code"

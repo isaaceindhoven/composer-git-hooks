@@ -5,11 +5,16 @@ set -euo pipefail
 # There is no 'readlink -f' on mac so we use python instead
 DIR=$(python -c "import os; print os.path.realpath('$0');");
 DIR=$(dirname "$DIR")
-source "$DIR"/shared.sh
+source "$DIR"/../shared.sh
 
-if ! docksal::custom_command_exists "phpstan"; then
-  echo "Missing phpstan docksal custom command"
-  exit 0
+if docksal::is_running; then
+  if ! docksal::custom_command_exists "phpstan"; then
+    git_hooks::warning "Missing phpstan docksal custom command"
+    exit 0
+  fi
+
+  fin phpstan -q
+else
+  git_hooks::info "Running phpstan on host, docksal project not up"
+  vendor/bin/phpstan analyse -q
 fi
-
-fin phpstan -q

@@ -5,8 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.1.5] - 2020-08-20
 ### Changed
 - Fallback to host's php when docksal is unavailable for the phpcs and phpstan standard hooks 
+
+### Fixed
+- The chain-hook script now properly forwards git's arguments to the actual hook. Before it would 'eat them up'.
 
 ## [0.1.4] - 2020-08-19
 ### Added

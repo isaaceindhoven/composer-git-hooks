@@ -44,7 +44,6 @@ class GitHooks
         'pre-commit',
     ];
     private const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
-    private const STANDARD_HOOK_DIRECTORY = 'standard-hooks';
 
     /** @var Logger */
     private $logger;
@@ -80,7 +79,6 @@ class GitHooks
 
         $this->symlinkHooks();
         $this->createProjectDefaultHookDirectories();
-        $this->makeStandardHooksExecutable();
 
         $this->logger->writeInfo('Updated git-hooks');
     }
@@ -113,27 +111,6 @@ class GitHooks
         foreach (self::PROJECT_DEFAULT_HOOK_DIRECTORIES as $hook) {
             $directory = sprintf('%s/%s/%s.d', $this->projectRoot, self::PROJECT_HOOKS_DIRECTORY, $hook);
             $this->fileSystem->createDirectoryIfNotExists($directory);
-        }
-    }
-
-    private function makeStandardHooksExecutable(): void
-    {
-        $standardHooksDirectory = sprintf('%s/../%s', __DIR__, self::STANDARD_HOOK_DIRECTORY);
-
-        $fileIterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($standardHooksDirectory, RecursiveDirectoryIterator::SKIP_DOTS)
-        );
-
-        /** @var FilesystemIterator $file */
-        foreach ($fileIterator as $file) {
-            if ($file->isDir() || ($file->getExtension() !== '' && $file->getExtension() !== 'sh')) {
-                continue;
-            }
-
-            if (!$file->isExecutable()) {
-                $this->setExecutablePermission($file->getPathname());
-                $this->logger->writeInfo(sprintf('Corrected permissions for standard hook %s', $file->getFilename()));
-            }
         }
     }
 

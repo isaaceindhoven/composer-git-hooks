@@ -10,11 +10,6 @@ How it works:
 - A composer-managed project
 
 ## Install
-Add the ISAAC repository to composer.
-
-```bash
-composer config repositories.isaac composer https://composer-packages.hq.isaac.nl/repository
-```
 
 Add the package as a dev dependency.
 

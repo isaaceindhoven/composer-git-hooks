@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2020-10-30
+### Added
+- Added LICENSE.md
+
+### Changed
+- Changed license to MIT
+
+### Removed
+- Removed ISAAC company-specifics from README and composer.json
+- Removed the standard-hooks (ISAAC specific) and put them into their own package.
+- ISAAC copyright preambles (preparation for open-sourcing)
+
 ## [0.1.5] - 2020-08-20
 ### Changed
 - Fallback to host's php when docksal is unavailable for the phpcs and phpstan standard hooks 

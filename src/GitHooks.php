@@ -1,14 +1,5 @@
 <?php
 
-/**
- * Do not remove or alter the notices in this preamble.
- * This software code regards ISAAC Standard Software.
- * Copyright © 2020 ISAAC and/or its affiliates.
- * www.isaac.nl All rights reserved. License grant and user rights and obligations
- * according to applicable license agreement. Please contact sales@isaac.nl for
- * questions regarding license and user rights.
- */
-
 declare(strict_types=1);
 
 namespace ISAAC\ComposerGitHooks;
@@ -53,7 +44,6 @@ class GitHooks
         'pre-commit',
     ];
     private const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
-    private const STANDARD_HOOK_DIRECTORY = 'standard-hooks';
 
     /** @var Logger */
     private $logger;
@@ -89,7 +79,6 @@ class GitHooks
 
         $this->symlinkHooks();
         $this->createProjectDefaultHookDirectories();
-        $this->makeStandardHooksExecutable();
 
         $this->logger->writeInfo('Updated git-hooks');
     }
@@ -122,27 +111,6 @@ class GitHooks
         foreach (self::PROJECT_DEFAULT_HOOK_DIRECTORIES as $hook) {
             $directory = sprintf('%s/%s/%s.d', $this->projectRoot, self::PROJECT_HOOKS_DIRECTORY, $hook);
             $this->fileSystem->createDirectoryIfNotExists($directory);
-        }
-    }
-
-    private function makeStandardHooksExecutable(): void
-    {
-        $standardHooksDirectory = sprintf('%s/../%s', __DIR__, self::STANDARD_HOOK_DIRECTORY);
-
-        $fileIterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($standardHooksDirectory, RecursiveDirectoryIterator::SKIP_DOTS)
-        );
-
-        /** @var FilesystemIterator $file */
-        foreach ($fileIterator as $file) {
-            if ($file->isDir() || ($file->getExtension() !== '' && $file->getExtension() !== 'sh')) {
-                continue;
-            }
-
-            if (!$file->isExecutable()) {
-                $this->setExecutablePermission($file->getPathname());
-                $this->logger->writeInfo(sprintf('Corrected permissions for standard hook %s', $file->getFilename()));
-            }
         }
     }
 

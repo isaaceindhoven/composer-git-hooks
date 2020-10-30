@@ -7,9 +7,3 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:1.10.10 /usr/bin/composer /usr/local/bin/
-
-USER docker
-RUN composer global remove hirak/prestissimo \
-    && composer global require isaac/composer-velocita \
-    && composer global velocita:enable https://composer-cache.hq.isaac.nl/
-USER root

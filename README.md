@@ -47,15 +47,6 @@ Add project specific git-hooks to `bin/git-hooks/{hookName}.d`. For example:
 
 All scripts (for in this case `pre-commit`) should give a 0 exit code for the whole hook to succeed.
 
-## Standard Hooks
-This module contains standard hooks that can be used in any project. You can use these as a reference or you can directly symlink to them (recommended). To include them in your project, run the following from your project root. All available standard hooks are included in this multi-line command.
-
-```shell script
-mkdir -p bin/git-hooks/pre-commit.d && ln -s ../../../vendor/isaac/composer-git-hooks/standard-hooks/pre-commit.d/phpcs bin/git-hooks/pre-commit.d/phpcs
-mkdir -p bin/git-hooks/pre-commit.d && ln -s ../../../vendor/isaac/composer-git-hooks/standard-hooks/pre-commit.d/phpstan bin/git-hooks/pre-commit.d/phpstan
-mkdir -p bin/git-hooks/prepare-commit-msg.d && ln -s ../../../vendor/isaac/composer-git-hooks/standard-hooks/prepare-commit-msg.d/add-jira-issue-id bin/git-hooks/prepare-commit-msg.d/add-jira-issue-id
-```
-
 ## Contribute
 Create a merge request.
 This package makes use of the `composer` plugin interface. See the [composer documentation](https://getcomposer.org/doc/articles/plugins.md).

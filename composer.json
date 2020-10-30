@@ -1,8 +1,15 @@
 {
     "name": "isaac/composer-git-hooks",
     "type": "composer-plugin",
-    "license": "proprietary",
+    "license": "MIT",
     "description": "ISAAC Composer Git Hooks",
+    "authors": [
+        {
+            "name": "ISAAC",
+            "email": "info@isaac.nl",
+            "homepage": "https://www.isaac.nl"
+        }
+    ],
     "minimum-stability": "stable",
     "config": {
         "sort-packages": true
@@ -13,8 +20,7 @@
     },
     "require-dev": {
         "composer/composer": "^1.10",
-        "isaac/php-code-sniffer-standard": "^17.0",
-        "isaac/phpstorm-copyright": "^1.0",
+        "isaac/php-code-sniffer-standard": "^19.0",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12.4"
@@ -26,12 +32,6 @@
     "autoload": {
         "psr-4": {
             "ISAAC\\ComposerGitHooks\\": "src/"
-        }
-    },
-    "repositories": {
-        "isaac": {
-            "type": "composer",
-            "url": "https://composer-packages.hq.isaac.nl/repository"
         }
     },
     "extra": {

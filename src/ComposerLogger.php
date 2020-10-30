@@ -11,7 +11,7 @@ use function sprintf;
 class ComposerLogger implements Logger
 {
     /** @var IOInterface */
-    private $io;
+    private IOInterface $io;
 
     public function __construct(IOInterface $io)
     {

@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace ISAAC\ComposerGitHooks;
 
-use FilesystemIterator;
 use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 
 use function chmod;
 use function file_exists;
@@ -46,13 +43,13 @@ class GitHooks
     private const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
 
     /** @var Logger */
-    private $logger;
+    private Logger $logger;
 
     /** @var FileSystem */
-    private $fileSystem;
+    private FileSystem $fileSystem;
 
     /** @var string */
-    private $projectRoot;
+    private string $projectRoot;
 
     public function __construct(
         Logger $logger,

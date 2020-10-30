@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2020-10-30
+### Changed
+- Open sourced package
+
+### Removed
+- Removed ISAAC company-specifics from README
+
 ## [0.2.1] - 2020-10-30
 ### Changed
 - phpcs fixes

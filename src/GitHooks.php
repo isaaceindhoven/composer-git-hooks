@@ -43,13 +43,13 @@ class GitHooks
     private const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
 
     /** @var Logger */
-    private Logger $logger;
+    private $logger;
 
     /** @var FileSystem */
-    private FileSystem $fileSystem;
+    private $fileSystem;
 
     /** @var string */
-    private string $projectRoot;
+    private $projectRoot;
 
     public function __construct(
         Logger $logger,

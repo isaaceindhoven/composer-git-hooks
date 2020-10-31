@@ -32,7 +32,7 @@ class FileSystem
     private const DIR_PERMISSIONS = 0755;
 
     /** @var Logger */
-    private Logger $logger;
+    private $logger;
 
     public function __construct(
         Logger $logger
@@ -157,7 +157,7 @@ class FileSystem
     {
         return $this->performRecursive($source, $dest, new class ($this) implements FileSystemAction {
             /** @var FileSystem */
-            private FileSystem $fileSystem;
+            private $fileSystem;
 
             public function __construct(FileSystem $fileSystem)
             {

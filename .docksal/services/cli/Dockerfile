@@ -1,4 +1,4 @@
-FROM docksal/cli:2.11-php7.4
+FROM docksal/cli:2.11-php7.3
 
 LABEL maintainer="ISAAC <info@isaac.nl>"
 

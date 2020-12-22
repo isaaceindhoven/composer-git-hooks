@@ -18,6 +18,16 @@ class ComposerPlugin implements PluginInterface, EventSubscriberInterface
         // noop
     }
 
+    public function deactivate(Composer $composer, IOInterface $io): void
+    {
+        // noop
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io): void
+    {
+        // noop
+    }
+
     /**
      * @return array|string[]
      */

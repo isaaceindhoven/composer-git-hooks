@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-12-22
+### Added
+- Composer 2 support
+
 ## [1.0.2] - 2020-10-31
 ### Fixed
 - Fixed issues due to PHP 7.4-only syntax

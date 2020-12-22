@@ -16,10 +16,10 @@
     },
     "require": {
         "php": "~7.3.0 || ~7.4.0",
-        "composer-plugin-api": "^1.1"
+        "composer-plugin-api": "^1.1 || ^2.0"
     },
     "require-dev": {
-        "composer/composer": "^1.10",
+        "composer/composer": "^1.10 || ^2.0",
         "isaac/php-code-sniffer-standard": "^19.0",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12",

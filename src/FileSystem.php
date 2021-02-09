@@ -166,8 +166,8 @@ class FileSystem
 
             public function invoke(string $source, string $dest): bool
             {
-                // We want to replace any existing files or symlinks from previous copyright installs by a symlink
-                if (is_file($dest)) {
+                // We want to replace any existing files or symlinks from previous installs by a symlink
+                if (is_link($dest) || is_file($dest)) {
                     unlink($dest);
                 }
 

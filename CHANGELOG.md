@@ -1,12 +1,15 @@
-# Changelog
-All notable changes to this project will be documented in this file.
+# Changelog 
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for the commit message format.
+## 1.2.0 (2021-02-09)
 
-## [Unreleased]
-### Addedd
-- PHP 8.0 support
+### Features
+
+* Add PHP 8 support
+
+### Bug Fixes
+
+* Before unlinking files from previous installs, check if we are actually dealing with either an existing file or existing symlink ([a3c5964](https://github.com/isaaceindhoven/composer-git-hooks/commit/a3c596443639cd71b9a8b1132bc20a8504574651))
 
 ## [1.1.0] - 2020-12-22
 ### Added

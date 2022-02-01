@@ -17,6 +17,19 @@ Add the package as a dev dependency.
 composer require --dev isaac/composer-git-hooks
 ```
 
+Add the package to the [allow-plugins section](https://getcomposer.org/doc/06-config.md#allow-plugins) of your `composer.json` file:
+```json
+{
+    "config": {
+        "allow-plugins": {
+            ...
+            "isaac/composer-git-hooks": true
+            ...
+        }
+    }
+}
+```
+
 ### Running the script manually
 
 This package is a composer plugin and will install the githooks automatically on `composer install` and `composer update`. Should you need it however, you can run the installer manually by adding it as a composer script and executing it.

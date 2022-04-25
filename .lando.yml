@@ -1,0 +1,19 @@
+name: composer-git-hooks
+
+services:
+  appserver:
+    type: php:7.4
+    via: cli
+    xdebug: true
+    composer_version: '2.3.5'
+
+# Add additional tooling
+tooling:
+  composer:
+    service: appserver
+  phpcs:
+    service: appserver
+  phpcbf:
+    service: appserver
+  phpstan:
+    service: appserver

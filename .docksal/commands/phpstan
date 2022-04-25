@@ -1,9 +1,0 @@
-#!/bin/bash
-#: exec_target = cli
-#
-## Runs phpstan
-## Usage: fin phpstan [params to passthrough]
-
-set -eo pipefail
-
-${PROJECT_ROOT}/vendor/bin/phpstan analyse -c ${PROJECT_ROOT}/phpstan.neon $@

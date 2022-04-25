@@ -1,7 +1,0 @@
-version: "2.1"
-
-services:
-  cli:
-    build:
-      context: services/cli
-    image: ${COMPOSE_PROJECT_NAME}_cli

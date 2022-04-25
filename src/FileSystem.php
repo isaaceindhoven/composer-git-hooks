@@ -31,8 +31,7 @@ class FileSystem
 {
     private const DIR_PERMISSIONS = 0755;
 
-    /** @var Logger */
-    private $logger;
+    private Logger $logger;
 
     public function __construct(
         Logger $logger
@@ -156,8 +155,7 @@ class FileSystem
     public function symlinkRecursive(string $source, string $dest): bool
     {
         return $this->performRecursive($source, $dest, new class ($this) implements FileSystemAction {
-            /** @var FileSystem */
-            private $fileSystem;
+            private FileSystem $fileSystem;
 
             public function __construct(FileSystem $fileSystem)
             {

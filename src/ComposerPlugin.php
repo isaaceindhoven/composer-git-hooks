@@ -28,9 +28,7 @@ class ComposerPlugin implements PluginInterface, EventSubscriberInterface
         // noop
     }
 
-    /**
-     * @return array|string[]
-     */
+    /** @inheritDoc */
     public static function getSubscribedEvents(): array
     {
         return [

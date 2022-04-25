@@ -1,6 +1,18 @@
 # Changelog 
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for the commit message format.
+## [1.3.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v1.2.0...v1.3.0) (2022-04-25)
+
+
+### Features
+
+* Remove PHP 7.3 support ([d98c628](https://github.com/isaaceindhoven/composer-git-hooks/commit/d98c62818557657279949a640d2c4c068a7fb50d))
+
+
+### Documentation
+
+* Add section on allow-plugins to README ([d385c30](https://github.com/isaaceindhoven/composer-git-hooks/commit/d385c303c80ae6e23e0d9d923cf9fc7309a9dc53))
+
 ## 1.2.0 (2021-02-09)
 
 ### Features

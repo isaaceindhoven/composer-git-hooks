@@ -6,4 +6,5 @@
 
     <!-- extend isaac ruleset -->
     <rule ref="ISAAC"></rule>
+
 </ruleset>

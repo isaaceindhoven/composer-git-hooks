@@ -1,6 +1,17 @@
 # Changelog 
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for the commit message format.
+
+## [unreleased]()
+
+### Added
+
+* Add PHP 8.1 support
+
+### Removed
+
+* Remove Composer 1 support
+
 ## [1.3.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v1.2.0...v1.3.0) (2022-04-25)
 
 

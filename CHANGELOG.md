@@ -1,6 +1,20 @@
 # Changelog 
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for the commit message format.
+## [2.0.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v1.3.0...v2.0.0) (2022-05-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove Composer 1 support
+
+### Features
+
+* Add PHP 8.1 support ([a7591bc](https://github.com/isaaceindhoven/composer-git-hooks/commit/a7591bc2360305aead63d0a04d140cb169397ef2))
+* Add php_version and testVersion to phpcs.xml ([43d9909](https://github.com/isaaceindhoven/composer-git-hooks/commit/43d99093419d5cf1a067351cf7f5e5389d88a466))
+* Remove Composer 1 support ([896ccf3](https://github.com/isaaceindhoven/composer-git-hooks/commit/896ccf33fed58b26c7b9f96835ab65045accf671))
+* Update ISAAC coding standard version to 27 ([538e81f](https://github.com/isaaceindhoven/composer-git-hooks/commit/538e81f8167190abe917b6113d1e941d8cc510a6))
+
 ## [1.3.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v1.2.0...v1.3.0) (2022-04-25)
 
 

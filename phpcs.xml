@@ -5,5 +5,9 @@
     <file>src</file>
 
     <!-- extend isaac ruleset -->
-    <rule ref="ISAAC"></rule>
+    <rule ref="ISAAC"/>
+
+    <!-- Set phpcs versions. -->
+    <config name="php_version" value="70400"/>
+    <config name="testVersion" value="7.4-8.1"/>
 </ruleset>

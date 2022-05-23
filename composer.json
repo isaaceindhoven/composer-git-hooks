@@ -19,12 +19,12 @@
         }
     },
     "require": {
-        "php": "~7.4.0 || ~8.0.0",
-        "composer-plugin-api": "^1.1 || ^2.0"
+        "php": "~7.4.0 || ~8.0.0 || ~8.1.0",
+        "composer-plugin-api": "^2.0"
     },
     "require-dev": {
-        "composer/composer": "^1.10 || ^2.0",
-        "isaac/php-code-sniffer-standard": "^19.0",
+        "composer/composer": "^2.0",
+        "isaac/php-code-sniffer-standard": "^27.0",
         "phpstan/extension-installer": "^1.1.0",
         "phpstan/phpstan": "^1.5.7",
         "phpstan/phpstan-strict-rules": "^1.1.0"

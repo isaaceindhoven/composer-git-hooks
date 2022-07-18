@@ -41,9 +41,8 @@ class ComposerPlugin implements PluginInterface, EventSubscriberInterface
     {
         $io = $event->getIO();
 
-        $logger = new ComposerLogger($io);
-        $fileSystem = new FileSystem($logger);
-        $gitHooks = new GitHooks($logger, $fileSystem);
+        $fileSystem = new FileSystem($io);
+        $gitHooks = new GitHooks($io, $fileSystem);
         $gitHooks->install();
     }
 }

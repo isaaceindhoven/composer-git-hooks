@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ISAAC\ComposerGitHooks;
 
 use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
+use Psr\Log\LoggerInterface;
 
 use function chmod;
 use function file_exists;
@@ -42,12 +43,12 @@ class GitHooks
     ];
     private const CHAIN_HOOK_FILENAME = 'scripts/chain-hook';
 
-    private Logger $logger;
+    private LoggerInterface $logger;
     private FileSystem $fileSystem;
     private string $projectRoot;
 
     public function __construct(
-        Logger $logger,
+        LoggerInterface $logger,
         FileSystem $fileSystem
     ) {
         $this->logger = $logger;
@@ -55,9 +56,9 @@ class GitHooks
 
         try {
             $this->projectRoot = $this->fileSystem->getProjectRoot();
-            $this->logger->writeInfo(sprintf('Using project root %s', $this->projectRoot));
+            $this->logger->info(sprintf('Using project root %s', $this->projectRoot));
         } catch (ProjectRootNotFoundException $e) {
-            $this->logger->writeError('No project root found');
+            $this->logger->warning('No project root found');
             exit(1);
         }
     }
@@ -65,14 +66,14 @@ class GitHooks
     public function install(): void
     {
         if (!file_exists(sprintf('%s/.git', $this->projectRoot))) {
-            $this->logger->writeError(sprintf('No .git directory found in %s', $this->projectRoot));
+            $this->logger->error(sprintf('No .git directory found in %s', $this->projectRoot));
             return;
         }
 
         $this->symlinkHooks();
         $this->createProjectDefaultHookDirectories();
 
-        $this->logger->writeInfo('Updated git-hooks');
+        $this->logger->info('Updated git-hooks');
     }
 
     private function symlinkHooks(): void
@@ -90,9 +91,9 @@ class GitHooks
                     $link
                 );
                 $this->setExecutablePermission($link);
-                $this->logger->writeInfo(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
+                $this->logger->info(sprintf('Created symlink %s -> %s', $link, $relativeTarget));
             } elseif (!is_link($link) || readlink($link) === false || readlink($link) !== $relativeTarget) {
-                $this->logger->writeWarning(sprintf('Git hook %s already exists, not using project hooks. ' .
+                $this->logger->warning(sprintf('Git hook %s already exists, not using project hooks. ' .
                     'Consider moving your custom hook to %s.', $link, self::PROJECT_HOOKS_DIRECTORY));
             }
         }
@@ -109,7 +110,7 @@ class GitHooks
     private function setExecutablePermission(string $filepath): bool
     {
         if (chmod($filepath, 0755) === false) {
-            $this->logger->writeError(sprintf('Failed to set permissions on %s', $filepath));
+            $this->logger->error(sprintf('Failed to set permissions on %s', $filepath));
             return false;
         }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ISAAC\ComposerGitHooks;
 
 use ISAAC\ComposerGitHooks\Exception\ProjectRootNotFoundException;
+use Psr\Log\LoggerInterface;
 
 use function array_pad;
 use function array_shift;
@@ -31,10 +32,10 @@ class FileSystem
 {
     private const DIR_PERMISSIONS = 0755;
 
-    private Logger $logger;
+    private LoggerInterface $logger;
 
     public function __construct(
-        Logger $logger
+        LoggerInterface $logger
     ) {
         $this->logger = $logger;
     }
@@ -105,15 +106,15 @@ class FileSystem
     {
         if (!file_exists($directory)) {
             if (!mkdir($directory, self::DIR_PERMISSIONS, true)) {
-                $this->logger->writeError(sprintf('Failed to create %s', $directory));
+                $this->logger->error(sprintf('Failed to create %s', $directory));
                 exit(1);
             }
 
-            $this->logger->writeInfo(sprintf('Created directory %s', $directory));
+            $this->logger->info(sprintf('Created directory %s', $directory));
         } elseif (!is_dir($directory)) {
-            $this->logger->writeError(sprintf('%s exists but is not a directory', $directory));
+            $this->logger->error(sprintf('%s exists but is not a directory', $directory));
         } else {
-            $this->logger->writeInfo(sprintf('Not creating directory %s because it already exists', $directory));
+            $this->logger->info(sprintf('Not creating directory %s because it already exists', $directory));
         }
     }
 

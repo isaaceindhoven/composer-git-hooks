@@ -1,6 +1,13 @@
 # Changelog 
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for the commit message format.
+## [2.1.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v2.0.0...v2.1.0) (2022-07-18)
+
+
+### Features
+
+* **ICOMP-716:** The plugin's console output is less chatty - only warnings and errors are shown by default. All output can be shown by running composer in verbose mode (--verbose or -vv). Changed the 'no project root found' error to a warning. ([a34205b](https://github.com/isaaceindhoven/composer-git-hooks/commit/a34205b03249d1b537f146f52ce39b2341342148))
+
 ## [2.0.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v1.3.0...v2.0.0) (2022-05-23)
 
 

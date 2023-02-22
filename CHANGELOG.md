@@ -1,6 +1,13 @@
 # Changelog 
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for the commit message format.
+## [2.2.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v2.1.0...v2.2.0) (2023-02-22)
+
+
+### Features
+
+* Added php 8.2 support ([710fd73](https://github.com/isaaceindhoven/composer-git-hooks/commit/710fd73814586114d1b61b3e33b78ae08a139d27))
+
 ## [2.1.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v2.0.0...v2.1.0) (2022-07-18)
 
 

@@ -5,7 +5,7 @@ services:
     type: php:7.4
     via: cli
     xdebug: true
-    composer_version: '2.3.5'
+    composer_version: '2.5.4'
 
 # Add additional tooling
 tooling:

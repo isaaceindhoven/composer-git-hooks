@@ -1,3 +1,9 @@
+Renamed and moved to the iO organization.
+===========
+This repository has been archived and is replaced by the [iO Composer Git Hooks repository](https://github.com/iodigital-com/composer-git-hooks).
+
+The Composer package has been replaced by `iodigital-com/composer-git-hooks`.
+
 # ISAAC Composer Git Hooks
 Set up the `.git/hooks` folder to run scripts found in the `bin/git-hooks/{hookName}.d` folders of the project.
 

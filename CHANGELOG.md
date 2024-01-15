@@ -1,6 +1,10 @@
 # Changelog 
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for the commit message format.
+## [2.2.1](https://github.com/isaaceindhoven/composer-git-hooks/compare/v2.2.0...v2.2.1) (2024-01-15)
+
+Abandoned in favor of iO repository.
+
 ## [2.2.0](https://github.com/isaaceindhoven/composer-git-hooks/compare/v2.1.0...v2.2.0) (2023-02-22)
 
 

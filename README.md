@@ -4,6 +4,13 @@ This repository has been archived and is replaced by the [iO Composer Git Hooks 
 
 The Composer package has been replaced by `iodigital-com/composer-git-hooks`.
 
+After migrating to the new package, the symlinks in the `.git/hooks` folder need to be updated. This can be done by executing the following commands from the project root:
+
+```bash
+find .git/hooks -type l -delete
+composer install
+```
+
 # ISAAC Composer Git Hooks
 Set up the `.git/hooks` folder to run scripts found in the `bin/git-hooks/{hookName}.d` folders of the project.
 

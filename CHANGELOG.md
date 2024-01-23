@@ -1,6 +1,13 @@
 # Changelog 
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for the commit message format.
+### [2.2.3](https://github.com/isaaceindhoven/composer-git-hooks/compare/v2.2.2...v2.2.3) (2024-01-23)
+
+
+### Documentation
+
+* add upgrade instructions ([b017ab2](https://github.com/isaaceindhoven/composer-git-hooks/commit/b017ab208cf25ff6c0f8ecd9d9ec013e224c3acc))
+
 ### [2.2.2](https://github.com/isaaceindhoven/composer-git-hooks/compare/v2.2.1...v2.2.2) (2024-01-22)
 
 
